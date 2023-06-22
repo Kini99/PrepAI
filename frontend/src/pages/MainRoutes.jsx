@@ -8,10 +8,10 @@ import Interview from './Interview'
 const MainRoutes = () => {
   return (
     <Routes>
-        <Route to="/" element={<Home/>} />
-        <Route to="/login" element={<Login/>} />
-        <Route to="/dashboard" element={<Dashboard/>} />
-        <Route to="/interview" element={<Interview/>} />
+        <Route path ="/" element={<Home/>} />
+        <Route path ="/login" element={<Login/>} />
+        <Route path ="/dashboard" element={<Dashboard/>} />
+        <Route path ="/interview" element={<Interview/>} />
     </Routes>
   )
 }
