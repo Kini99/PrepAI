@@ -6,7 +6,12 @@
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+<<<<<<< HEAD
     "@fortawesome/fontawesome-free": "^6.4.0",
+=======
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+>>>>>>> 9d00de4059c5df6b619fc70640267aeec5cffcd9
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
