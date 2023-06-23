@@ -1,7 +1,12 @@
+import logo from './logo.svg';
+import './App.css';
+
+import Navbar from './components/Navbar/Navbar';
+import Home from './pages/Home';
+import Footer from './components/Footer';
 import MainRoutes from "./pages/MainRoutes";
 import 'tailwindcss/tailwind.css';
-import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
+
 
 function App() {
   return (
