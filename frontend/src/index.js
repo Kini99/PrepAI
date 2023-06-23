@@ -4,26 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-<<<<<<< HEAD
 import { ChakraProvider } from '@chakra-ui/react'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <ChakraProvider>
  <BrowserRouter>
- <ChakraProvider>
     <App />
-    </ChakraProvider>
     </BrowserRouter>
-=======
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
->>>>>>> 9d00de4059c5df6b619fc70640267aeec5cffcd9
+    </ChakraProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
