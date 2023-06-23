@@ -3,16 +3,19 @@ const app= express()
 const passport=require("passport")
 const {connection}= require("./db")
 const {Userroute}=require("./route/user.route")
-require("./google.oauth")
+require("./google.oauth");
+const cors=require("cors")
 
 require("dotenv").config()
+app.use(cors());
 app.use(express.json())
+
 
 const { googleAuthentication } = require("./google.oauth")
 
 
 
-app.use("/",Userroute)
+ app.use("/",Userroute)
 
 
 

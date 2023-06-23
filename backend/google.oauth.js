@@ -15,8 +15,8 @@ passport.deserializeUser(async (email, done) => {
 passport.use(
 	new GoogleStrategy(
 		{
-			clientID:process.env.Client,
-			clientSecret: process.env.Clinet_Sec,
+			clientID:"404575401589-l7bt9o0g15d7absejdn6vr0emk2jst00.apps.googleusercontent.com",
+			clientSecret:"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",
 			callbackURL: "http://localhost:1111/auth/google/callback",
 			passReqToCallback: true,
 		},
@@ -55,7 +55,7 @@ const googleAuthentication = async (req, res) => {
   const user = req.user
 
 
-  const frontendURL = "http://127.0.0.1:5502/frontend/index.html"
+  const frontendURL = "http://localhost:3000/dashboard"
 
   res.send(`
               <a href="${frontendURL}?userID=${user._id}" id="myid" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #222222; margin: 0; padding: 0; overflow: scroll;">
