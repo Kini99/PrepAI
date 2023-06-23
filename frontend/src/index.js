@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
