@@ -19,6 +19,8 @@ import {BsGithub} from "react-icons/bs";
 import {tw} from "twind";
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer';
 
 function Login() {
 
@@ -79,6 +81,8 @@ function Login() {
   };
 
   return (
+<>
+<Navbar />
     <MDBContainer fluid className="p-3 my-5 h-custom">
 
       <MDBRow>
@@ -174,6 +178,8 @@ function Login() {
     </MDBCol>
     </MDBRow>
     </MDBContainer>
+    <Footer/>
+    </>
   );
 }
 

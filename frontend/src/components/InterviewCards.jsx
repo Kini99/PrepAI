@@ -69,7 +69,7 @@ let year = date.getFullYear();
 
                     </div>
 
-                    <button className='bg-sky-500/75 p-2 text-white-600/100' >Review Interview</button>
+                    <button className='bg-blue-500/75 p-2 text-white-600/100' >Review Interview</button>
 
                     <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -84,8 +84,6 @@ let year = date.getFullYear();
     <Input type="text" placeholder='Enter title' />
     <br />
     <br />
-
-
   
     <label htmlFor="type">Select Interview type</label>  
     <br />
@@ -103,18 +101,12 @@ let year = date.getFullYear();
 
 <br />
 
-{/* <label htmlFor="track">select Interview Track</label> */}
 
 <Select placeholder='Select Interview Track'>
   <option value='MERN'>MERN</option>
   <option value='Nodejs'>Nodejs</option>
   <option value='java'>Java</option>
 </Select>
-
-
-  
-    
-
 
             </ModalBody>
   
@@ -126,9 +118,6 @@ let year = date.getFullYear();
             </ModalFooter>
           </ModalContent>
         </Modal>
-
-
-
 
                 </div>
 
