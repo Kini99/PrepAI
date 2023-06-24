@@ -8,73 +8,66 @@ const bcrypt = require("bcrypt");
 const Userroute = express.Router();
 
 
-Userroute.post("/signup",async (req,res)=>{
-    const{ name, email, password}=req.body
+// Userroute.post("/signup", async (req, res) => {
+//   const { name, email, password } = req.body;
 
-    const passwordReq =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!passwordReq.test(password)) {
-    return res.status(200).json({
-      msg: "Invalid password format! Password format Should contain atleast one uppercase character, one number, special character and length greater then 8.",
-    });
-  }
+//   const user = await UserModel.find({ email });
+//   if (user.length <= 0) {
+//     try {
+//       bcrypt.hash(password, 6, async (err, hash) => {
+//         if (err) {
+//           res.send({ msg: "somthing went wrong" });
+//         } else {
+//           const user = new UserModel({
+//             name,
+//             email,
+//             password: hash,
+//           });
 
-    const user =await UserModel.find({email})
-    if(user.length<=0){
-        try{
-            bcrypt.hash(password,6,async(err,hash)=>{
-                if(err){
-                    res.send({msg:"somthing went wrong"})
-                }else{
-                    const user = new UserModel({
-                     name, 
-                     email,
-                     phone,
-                      password:hash})
+//           await user.save();
+//           res.send({ msg: "New user has been signup" });
+//         }
+//       });
+//     } catch (err) {
+//       res.send({ msg: "Something went Wrong", err: err.message });
+//     }
+//   } else {
+//     res.send({ msg: "User already exist, please login" });
+//   }
+// });
 
-                      await user.save();
-                      res.send({msg:"New user has been signup"})
+Userroute.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
 
-                }
-            })
-        }catch(err){
-            res.send({ msg: "Something went Wrong", err: err.message });  
-        }
-    }else{
-            res.send({ msg: "User already exist, please login" });
-        }
-    
-})
+  // Regular expression to validate password
+  const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 
-Userroute.post("/login", async(req,res)=>{
-    const {email,password}=req.body
-
-  const user = await UserModel.find({ email });
-  if (user.length <= 0) {
-
-    try {
-      bcrypt.hash(password, 6, async (err, hash) => {
-        if (err) {
-          res.send({ msg: "somthing went wrong" });
-        } else {
-          const user = new UserModel({
-            name,
-            email,
-            password: hash,
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      if (passwordRegex.test(password)) {
+        bcrypt.hash(password, 5, async (err, hash) => {
+          const newUser = new UserModel({ name, email, password: hash });
+          await newUser.save();
+          res.status(200).send({ message: "Registration successful" });
+        });
+      } else {
+        res
+          .status(400)
+          .send({
+            message:
+              "Password should have a minimum length of 8 and contain at least one uppercase letter, one symbol, and one number",
           });
-
-          await user.save();
-          res.send({ msg: "New user has been signup" });
-        }
-      });
-    } catch (err) {
-      res.send({ msg: "Something went Wrong", err: err.message });
+      }
+    } else {
+      res.status(400).send({ message: "There’s already an account with that email" });
     }
-  } else {
-    res.send({ msg: "User already exist, please login" });
+  } catch (error) {
+    res.status(400).send({ message: error.message });
   }
 });
+
 
 Userroute.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -83,7 +76,8 @@ Userroute.post("/login", async (req, res) => {
     if (user.length > 0) {
       bcrypt.compare(password, user[0].password, (err, result) => {
         if (result) {
-          const token = jwt.sign({ userid: user[0]._id }, "openai");
+          const token = jwt.sign({userid:user[0]._id}, process.env.TOKENKEY,{expiresIn:"7d"})
+          const refreshToken = jwt.sign({userid:user[0]._id},process.env.REFRESHTOKENKEY,{expiresIn:"28d"})
 
           res.send({ msg: " user has been Logged in ", token: token });
         }
