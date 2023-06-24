@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
       try {
         const decoded = jwt.verify(token, "openai");
         console.log(decoded);
-        req.body.userid = decoded.userid;
+        req.body.userID = decoded.userID;
         req.body.name = decoded.name;
         req.body.time = new Date();
         next();

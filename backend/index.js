@@ -104,12 +104,12 @@ app.use(auth);
 
 app.post("/posthistory", async (req, res) => {
   let obj = {};
-  obj.userID = req.body.userid; // Corrected key name
+  obj.userID = req.body.userID; // Corrected key name
 
   // Make sure to import the correct model name
   try {
 
-    const user = await UserModel.findById({ _id: req.body.userid }); // Corrected model name
+    const user = await UserModel.findById({ _id: req.body.userID }); // Corrected model name
     console.log(user);
 
     if (!user) {
