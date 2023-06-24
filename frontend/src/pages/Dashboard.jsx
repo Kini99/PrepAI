@@ -29,6 +29,7 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 import Navbar1 from '../components/Navbar1';
+import Footer from '../components/Footer';
 
 
 const Dashboard = () => {
@@ -45,18 +46,17 @@ const Dashboard = () => {
     localStorage.setItem("title",title);
 navigate("/interview");
   }
-  // Sample data for average scores
  
   return (
      <>
-    <Navbar1></Navbar1>
+    <Navbar1 />
     <div>
 
       <h1>Welcome to PrepAI</h1>
       <button className='bg-blue-500/75 p-2 text-white-600/100 m-[auto] mt-2 mb-2 text-white' onClick={onOpen}>Start New Interview</button>
 
       <div className='w-[95%] m-[auto] flex justify-between mt-3'>
-        <div className='bg-sky-500/70 shadow-xl w-[75%] p-2 border-r-5'>
+        <div className='bg-blue-500/75 shadow-xl w-[75%] p-2 border-r-5'>
           {/* <p>Interview Practice Details</p> */}
 
           <p className='font-bold text-left'>Great job on completing your interview</p>
@@ -108,7 +108,6 @@ navigate("/interview");
 
 {type === 'Technical Interview' && (
         <Select
-          className="hidden"
           placeholder="Select Interview Track"
           value={field}
           onChange={(e) => setField(e.target.value)}
@@ -131,6 +130,7 @@ navigate("/interview");
         </Modal>
 
     </div>
+    <Footer/>
     </>
   );
 

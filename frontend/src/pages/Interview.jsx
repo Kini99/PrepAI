@@ -3,6 +3,7 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import {BiMicrophone} from "react-icons/bi"
 import {BiSolidMicrophone} from "react-icons/bi"
 import axios from 'axios';
+import Navbar1 from '../components/Navbar1';
 
 const Interview = () => {
   const [input,setInput]=useState("");
@@ -101,6 +102,8 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
   };
 
   return (
+    <>
+    <Navbar1 />
     <div className='flex flex-col items-center justify-center h-[80%] ' id="mainContainer">
       <h3 >{title}</h3>
       <h4>{type}{field? `- ${field}`:null}</h4>
@@ -149,6 +152,7 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
     </div>
     
     </div>
+    </>
   )
 }
 

@@ -10,23 +10,23 @@ const Footer = () => {
         <div className='w-[30%] m-[auto] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-2'>
            
         <div className="rounded-full   w-[35%] border-2 border-black-600 border-white">
-    <FontAwesomeIcon icon={faFacebook} />
+    <FontAwesomeIcon icon={faFacebook} color='white' />
   </div>
 
   <div className="rounded-full   w-[35%] border-2 border-black-600 border-white">
-    <FontAwesomeIcon icon={faTwitter} />
+    <FontAwesomeIcon icon={faTwitter} color='white' />
   </div>
 
   <div className="rounded-full   w-[35%] border-2 border-black-600 border-white">
-    <FontAwesomeIcon icon={faLinkedin} style={{width:"100%"}} />
+    <FontAwesomeIcon icon={faLinkedin} style={{width:"100%"}} color='white' />
   </div>
 
   <div className="rounded-full   w-[35%] border-2 border-black-600 border-white">
-    <FontAwesomeIcon icon={faInstagram} />
+    <FontAwesomeIcon icon={faInstagram} color='white' />
   </div>
 
   <div className="rounded-full   w-[35%] border-2 border-black-600 border-white">
-    <FontAwesomeIcon icon={faYoutube} />
+    <FontAwesomeIcon icon={faYoutube} color='white' />
   </div>
 
         </div>
