@@ -106,7 +106,6 @@ navigate("/interview");
 
 <br />
 
-{type === 'Technical Interview' && (
         <Select
           placeholder="Select Interview Track"
           value={field}
@@ -116,7 +115,6 @@ navigate("/interview");
           <option value="Nodejs">Nodejs</option>
           <option value="Java">Java</option>
         </Select>
-      )}
 
             </ModalBody>
   

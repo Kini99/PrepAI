@@ -23,4 +23,22 @@ historyRoute.get("/",async(req,res)=>{
 })
 
 
+historyRoute.get("/:id",async(req,res)=>{
+try {
+  const {id}=req.params;
+  const user = await UserModel.find({_id:req.body.userID});
+  if(!user){
+      return res.status(400).send({ msg: "User not found" });
+  }
+    const singleInterview = await HistoryModel.find({_id:id});
+    if(!singleInterview){
+        return res.status(400).send({ msg: "Interview not found" });
+    }
+    res.status(200).send({"msg":"Interview Details" , singleInterview})
+} catch (error) {
+  console.log(error.message)
+  return res.status(400).send({ msg: error.message });
+}
+})
+
 module.exports={historyRoute}

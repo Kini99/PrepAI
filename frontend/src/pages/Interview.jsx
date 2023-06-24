@@ -48,9 +48,13 @@ const Interview = () => {
 
   const handleSave=()=>{
     const token=localStorage.getItem("logintoken")
-const payload={
-  conversationHistory:messages
-}
+    let payload;
+       payload={
+        title,
+        type,
+        field,
+        conversationHistory:messages
+      }
 
 fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
   method:"POST",
@@ -67,12 +71,6 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
  console.log(error)
 })
 
-    // axios.post(`${process.env.REACT_APP_SERVER}/posthistory`, payload)
-    // .then((res)=>{
-    //  console.log(res,"check")
-    //  console.log(res.data.res,".res")
-    // })
-    // .catch((err)=>console.log(err))
     
   }
 

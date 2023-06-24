@@ -107,7 +107,9 @@ app.post("/posthistory", async (req, res) => {
   let obj = {};
   obj.userID = req.body.userID; // Corrected key name
   obj.title = req.body.title;
-  obj.field = req.body.field;
+  if(req.body.field){
+obj.field = req.body.field;
+  }
   obj.type = req.body.type;
   // Make sure to import the correct model name
   try {
