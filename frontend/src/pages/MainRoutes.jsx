@@ -5,6 +5,7 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import Interview from './Interview'
 import InterviewCards from '../components/InterviewCards'
+import Review from './Review'
 
 const MainRoutes = () => {
   return (
@@ -13,7 +14,7 @@ const MainRoutes = () => {
         <Route path ="/login" element={<Login/>} />
         <Route path ="/dashboard" element={<Dashboard/>} />
         <Route path ="/interview" element={<Interview/>} />
-        {/* <Route path ="/cards" element={<InterviewCards/>} /> */}
+        <Route path ="/review" element={<Review/>} />
     </Routes>
   )
 }

@@ -55,6 +55,7 @@ const generateSystemPrompt = (field) => {
 app.post("/chatPrompt",auth, async (req, res) => {
   try {
     const { field, prompt } = req.body;
+
     if (conversationHistory.length === 0) {
       conversationHistory.push(generateSystemPrompt(field));
       conversationHistory.push({

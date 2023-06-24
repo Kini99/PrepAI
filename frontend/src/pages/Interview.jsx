@@ -4,12 +4,37 @@ import {BiMicrophone} from "react-icons/bi"
 import {BiSolidMicrophone} from "react-icons/bi"
 import axios from 'axios';
 import Navbar1 from '../components/Navbar1';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  Accordion,
+      AccordionItem,
+      AccordionButton,
+      AccordionPanel,
+      AccordionIcon,
+      Box,
+      Input,
+      Checkbox, CheckboxGroup, Stack,
+      Radio, RadioGroup,
+      Select
+    
+} from '@chakra-ui/react'
 
 const Interview = () => {
-  const [input,setInput]=useState("");
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [messages,setMessages]=useState([]);
-  const [isLoading,setIsLoading]=useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [feedback,setFeedback]=useState();
+  const [score,setScore]=useState();
 
   const chatBoxRef = useRef(null);
 
@@ -17,33 +42,31 @@ const Interview = () => {
   const type=localStorage.getItem("type");
   const field=localStorage.getItem("field");
 
-
-  const [aiResponse,setAiResponse]=useState("")
-
   const updateScroll = () => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight - chatBoxRef.current.clientHeight;
     }
   };
 
-  const handleSend=()=>{
+  const handleSend= async ()=>{
     const prompt=editedTranscript||transcript
 
-    axios.post(`${process.env.REACT_APP_SERVER}/chatPrompt`, {field, prompt})
-    .then((res)=>{
-     console.log(res,"check")
-     console.log(res.data.res,".res")
-     setAiResponse(res.data.res)
-    })
-   
-    .catch((err)=>console.log(err))
-    setMessages([...messages,
-      {text:editedTranscript||transcript, isUser:true},
-      {text:aiResponse, isUser:false},
-    ])
-    setEditedTranscript(""); 
-  resetTranscript(); 
-  updateScroll();
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/chatPrompt`, { field, prompt });
+      const aiResponse = res.data.res;
+      
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: prompt, isUser: true },
+        { text: aiResponse, isUser: false },
+      ]);
+      
+      setEditedTranscript("");
+      resetTranscript();
+      updateScroll();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const handleSave=()=>{
@@ -71,6 +94,7 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
  console.log(error)
 })
 
+onOpen();
     
   }
 
@@ -99,6 +123,11 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
     setIsListening(!isListening);
   };
 
+  const handleClick=()=>{
+    console.log(feedback,score)
+    onClose();
+  }
+
   return (
     <>
     <Navbar1 />
@@ -108,15 +137,16 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
       <div className='w-[95%] h-[75%] flex flex-row ' id="subContainer" style={{ position: 'fixed', bottom: 0 }}>
       <div className='flex flex-col items-start justify-start h-full p-[20px] w-[40%] text-justify' id="promptContainer">
 <h5>Follow the below steps to conduct the interview:-</h5>
-<br/>
 <p>Step 1: Copy the below prompt and send to start the interview - </p>
  <p>You are an interviewer. Ask me 3 questions related to {field}, one after the other. You should go to the next question only after I give an answer to the already asked question.</p> 
-<br/>
  <p>Step 2: Record or Type your answer to the question asked and send</p>
- <br/>
- <p>Step 3: Once all the questions are answered, send the below prompt to get your feedback and score.</p>
- <br/>
+
+ <p>Step 3: Once all the questions are answered, send the below prompt to get your feedback and score - </p>
+ <p></p>
+
  <p>Step 4: Click on Finish Interview to save your Interview.</p>
+
+ <p>Step 5: Copy the feedback received and submit it along with scores in the Form shown.</p>
       </div>
       <div id="chatContainer" className='flex flex-col items-start justify-start h-full p-[20px] w-[95%] '>
     <div className='flex flex-col items-start justify-start h-[80%] overflow-y-scroll p-10 w-[100%] border-green-500 border-[1px]' id="chatBox" ref={chatBoxRef}>
@@ -124,7 +154,7 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
         message.isUser? <div key={index} className="bg-gray-200 text-black self-end my-[5px] p-[10px] rounded-[10px] max-w-[50%] break-words">
         {message.text}
       </div>:<div key={index} className='bg-green-500 text-white self-start my-[5px] p-[10px] rounded-[10px] max-w-[50%] break-words'>
-      {aiResponse}
+      {message.text}
     </div>
       ))}
     </div>
@@ -148,7 +178,44 @@ fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
     </div>
     </div>
     </div>
-    
+    <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Enter Details</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {/* <Lorem count={2} /> */}
+              
+     <label htmlFor="title">Feedback</label> 
+     <br />        
+    <Input type="text" placeholder='Enter title' value={feedback} onChange={(e)=>setFeedback(e.target.value)} />
+    <br />
+    <label htmlFor="title">Score</label> 
+     <br />        
+     <Input
+  type="number"
+  placeholder="Enter title"
+  value={score}
+  onChange={(e) => {
+    const value = parseInt(e.target.value);
+    if (value >= 0 && value <= 10) {
+      setScore(value);
+    } else {
+      window.alert('Input must be within the range of 0-10.');
+    }
+  }}/>
+    <br />
+
+            </ModalBody>
+  
+            <ModalFooter>
+              <Button colorScheme='blue' mr={3} onClick={onClose} style={{backgroundColor:"black",color:"white"}}>
+                Close
+              </Button>
+              <Button variant='ghost' style={{backgroundColor:"black",color:"white"}} onClick={handleClick}>Submit</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
     </div>
     </>
   )
