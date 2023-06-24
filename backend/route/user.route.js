@@ -80,7 +80,7 @@ Userroute.post("/login", async (req, res) => {
           const token = jwt.sign({userID:user[0]._id}, process.env.TOKENKEY,{expiresIn:"7d"})
           const refreshToken = jwt.sign({userID:user[0]._id},process.env.REFRESHTOKENKEY,{expiresIn:"28d"})
 
-          res.send({ msg: " user has been Logged in ", token: token });
+          res.send({ msg: " user has been Logged in ", token: token, user });
         }
       });
     } else {
