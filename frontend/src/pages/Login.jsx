@@ -69,7 +69,6 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/signup`, payload)
       .then((res) =>{
-
           navigate("/login")
          alert(res.data.message);
         })
