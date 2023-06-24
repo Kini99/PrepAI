@@ -31,3 +31,12 @@ const auth = async (req, res, next) => {
   }
 };
 module.exports = { auth };
+
+// const jwt = require("jsonwebtoken");
+// require("dotenv").config();
+// const { blackmodel } = require("../model/black.model");
+
+// const auth = async (req, res, next) => {
+//   next();
+// };
+// module.exports = { auth };

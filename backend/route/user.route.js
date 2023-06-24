@@ -7,6 +7,7 @@ const { blackmodel } = require("../model/black.model");
 const bcrypt = require("bcrypt");
 const Userroute = express.Router();
 
+
 // Userroute.post("/signup", async (req, res) => {
 //   const { name, email, password } = req.body;
 
@@ -40,6 +41,7 @@ Userroute.post("/signup", async (req, res) => {
 
   // Regular expression to validate password
   const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
 
   try {
     const user = await UserModel.findOne({ email });

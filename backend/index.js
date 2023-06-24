@@ -108,8 +108,10 @@ app.post("/posthistory", async (req, res) => {
 
   // Make sure to import the correct model name
   try {
-    console.log("hello")
-    const user = await UserModel.findById({_id:req.body.userid}); // Corrected model name
+
+    const user = await UserModel.findById({ _id: req.body.userid }); // Corrected model name
+    console.log(user);
+
     if (!user) {
       return res.send({ msg: "User not found" });
     }
