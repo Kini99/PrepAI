@@ -52,10 +52,9 @@ const generateSystemPrompt = (field) => {
   };
 };
 
-app.post("/chatPrompt",auth, async (req, res) => {
+app.post("/chatPrompt", async (req, res) => {
   try {
     const { field, prompt } = req.body;
-
     if (conversationHistory.length === 0) {
       conversationHistory.push(generateSystemPrompt(field));
       conversationHistory.push({
@@ -110,9 +109,7 @@ app.post("/posthistory", async (req, res) => {
   let obj = {};
   obj.userID = req.body.userID; // Corrected key name
   obj.title = req.body.title;
-  if(req.body.field){
-obj.field = req.body.field;
-  }
+  obj.field = req.body.field;
   obj.type = req.body.type;
   // Make sure to import the correct model name
   try {

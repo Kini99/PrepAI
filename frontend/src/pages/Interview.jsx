@@ -26,8 +26,11 @@ import {
       Select
     
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom';
 
 const Interview = () => {
+
+  const navigate=useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -50,11 +53,11 @@ const Interview = () => {
 
   const handleSend= async ()=>{
     const prompt=editedTranscript||transcript
-
+console.log(prompt)
     try {
       const res = await axios.post(`${process.env.REACT_APP_SERVER}/chatPrompt`, { field, prompt });
       const aiResponse = res.data.res;
-      
+      console.log(aiResponse)
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: prompt, isUser: true },
@@ -125,7 +128,9 @@ onOpen();
 
   const handleClick=()=>{
     console.log(feedback,score)
+    alert("Details saved successfully!")
     onClose();
+    navigate("/dashboard")
   }
 
   return (
@@ -138,7 +143,7 @@ onOpen();
       <div className='flex flex-col items-start justify-start h-full p-[20px] w-[40%] text-justify' id="promptContainer">
 <h5>Follow the below steps to conduct the interview:-</h5>
 <p>Step 1: Copy the below prompt and send to start the interview - </p>
- <p>You are an interviewer. Ask me 3 questions related to {field}, one after the other. You should go to the next question only after I give an answer to the already asked question.</p> 
+ <p>You are an interviewer. Ask me 3 questions related to {field}, one after the other. You should go to the next question only after I give an answer to the already asked question. Give me feedback at the end and give me rating out of 10 </p> 
  <p>Step 2: Record or Type your answer to the question asked and send</p>
 
  <p>Step 3: Once all the questions are answered, send the below prompt to get your feedback and score - </p>
