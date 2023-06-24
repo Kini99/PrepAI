@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
     Modal,
     ModalOverlay,
@@ -31,9 +32,21 @@ const InterviewCards = () => {
     const handleClick = () =>{
 
     }
+
+    const date = new Date();
+    let options = { weekday: 'short' };
+let day = date.toLocaleDateString('en-US', options);
+
+let options_1 = { month: 'short' };
+let month = date.toLocaleDateString('en-US', options_1);
+
+
+let date_value = date.getDate();
+// let month = date.getMonth() + 1;
+let year = date.getFullYear();
     return (
         <>
-            <div className='w-[95%] m-[auto] p-4 bg-slate-100'>
+            <div className='w-[95%] m-[auto] p-4 bg-slate-100 mt-3'>
 
                 <div className="bg-white border-4 border-indigo-200 border-y-indigo-500 shadow-xl w-[30%] p-2">
 
@@ -41,9 +54,9 @@ const InterviewCards = () => {
 
                         <div className='w-[45px] overflow-hidden rounded-[6px] bg-[#F2F7FF] text-center'>
 
-                            <div className='bg-[#85A9EF] pb=[3px] text-[8px] font-medium text-[#21191B]'>Fri</div>
-                            <div className='text-xl font-semibold text-[#21191B]'>23</div>
-                            <div className='mb-1 text-sm font-medium text-[#6C6768]'>Jun</div>
+                            <div className='bg-[#85A9EF] pb=[3px] text-[8px] font-medium text-[#21191B] text-sm'>{day}</div>
+                            <div className='text-xl font-semibold text-[#21191B]'>{date_value}</div>
+                            <div className='mb-1 text-sm font-medium text-[#6C6768]'>{month}</div>
 
                         </div>
 
@@ -56,7 +69,7 @@ const InterviewCards = () => {
 
                     </div>
 
-                    <button className='bg-sky-500/75 p-2 text-white-600/100' onClick={onOpen}>Start Interview</button>
+                    <button className='bg-sky-500/75 p-2 text-white-600/100' onClick={onOpen}>Review Interview</button>
 
                     <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
