@@ -52,41 +52,48 @@ const generateSystemPrompt = (field) => {
 };
 
 app.post("/chatPrompt", async (req, res) => {
-  const { field, prompt } = req.body;
-  conversationHistory.push(generateSystemPrompt(field));
-  conversationHistory.push({
-    role: "assistant",
-    content: "Great, let's start the interview",
-  });
-
-  conversationHistory.push({ role: "user", content: prompt });
-
-  if (conversationHistory.length === 5) {
+  try {
+    const { field, prompt } = req.body;
+    conversationHistory.push(generateSystemPrompt(field));
     conversationHistory.push({
-      role: "system",
-      content: "Please provide your feedback and rating for the interview.",
+      role: "assistant",
+      content: "Great, let's start the interview",
     });
-    conversationHistory.push({ role: "assistant", content: "" }); // Add an empty response for the assistant to fill
 
-    return res.status(200).send({ status: 200, res: "", bot: "" });
+    conversationHistory.push({ role: "user", content: prompt });
+
+    if (conversationHistory.length === 5) {
+      conversationHistory.push({
+        role: "system",
+        content: "Please provide your feedback and rating for the interview.",
+      });
+      conversationHistory.push({ role: "assistant", content: "" }); // Add an empty response for the assistant to fill
+
+      return res.status(200).send({ status: 200, res: "", bot: "" });
+    }
+
+    const response = await openAI.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: conversationHistory,
+      max_tokens: 100,
+    });
+
+    const reply = response.data.choices[0].message.content.trim();
+
+    if (reply) {
+      conversationHistory.push({ role: "assistant", content: reply });
+
+      return res.status(200).send({ status: 200, res: reply, bot: reply });
+    }
+
+    return res.status(500).send({ status: 500, res: "Try again later" });
+  } catch (error) {
+    // Handle the error
+    console.error(error.message);
+    return res.status(500).send({ status: 500, res: "An error occurred" });
   }
-
-  const response = await openAI.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: conversationHistory,
-    max_tokens: 100,
-  });
-
-  const reply = response.data.choices[0].message.content.trim();
-
-  if (reply) {
-    conversationHistory.push({ role: "assistant", content: reply });
-
-    return res.status(200).send({ status: 200, res: reply, bot: reply });
-  }
-
-  return res.status(500).send({ status: 500, res: "Try again later" });
 });
+
 
 // console.log(conversationHistory);
 
@@ -97,15 +104,18 @@ app.use(auth);
 
 app.post("/posthistory", async (req, res) => {
   let obj = {};
-  obj.userID = req.body.userid; // Corrected key name
+  obj.userID = req.body.userID; // Corrected key name
 
   // Make sure to import the correct model name
   try {
-    const user = await UserModel.findById(req.body.userid); // Corrected model name
+
+    const user = await UserModel.findById({ _id: req.body.userID }); // Corrected model name
+    console.log(user);
+
     if (!user) {
       return res.send({ msg: "User not found" });
     }
-    console.log(conversationHistory);
+    console.log(user);
     obj.conversationHistory = conversationHistory;
     const history = new HistoryModel(obj);
     await history.save();
