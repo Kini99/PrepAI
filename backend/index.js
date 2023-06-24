@@ -55,11 +55,14 @@ const generateSystemPrompt = (field) => {
 app.post("/chatPrompt", async (req, res) => {
   try {
     const { field, prompt } = req.body;
-    conversationHistory.push(generateSystemPrompt(field));
-    conversationHistory.push({
-      role: "assistant",
-      content: "Great, let's start the interview",
-    });
+
+    if (conversationHistory.length === 0) {
+      conversationHistory.push(generateSystemPrompt(field));
+      conversationHistory.push({
+        role: "assistant",
+        content: "Great, let's start the interview",
+      });
+    }
 
     conversationHistory.push({ role: "user", content: prompt });
 
