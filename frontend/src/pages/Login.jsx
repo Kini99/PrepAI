@@ -69,13 +69,11 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/signup`, payload)
       .then((res) =>{
-         alert(res.data.msg);
-         if(res.data.token){
-          localStorage.setItem("logintoken",res.data.token)
-          navigate("/dashboard")
-         }
+
+          navigate("/login")
+         alert(res.data.message);
         })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
 
     setEmail("");
     setPassword("");

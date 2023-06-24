@@ -16,6 +16,7 @@ const Interview = () => {
   const type=localStorage.getItem("type");
   const field=localStorage.getItem("field");
 
+
   const [aiResponse,setAiResponse]=useState("")
 
   const updateScroll = () => {
@@ -42,6 +43,36 @@ const Interview = () => {
     setEditedTranscript(""); 
   resetTranscript(); 
   updateScroll();
+  }
+
+  const handleSave=()=>{
+    const token=localStorage.getItem("logintoken")
+const payload={
+  conversationHistory:messages
+}
+
+fetch(`${process.env.REACT_APP_SERVER}/posthistory`,{
+  method:"POST",
+  body:JSON.stringify(payload),
+  headers: {
+   "Content-Type": "application/json",
+   "Authorization": `${token}`
+ }
+})
+.then((res)=>res.json())
+.then((data)=>{
+ console.log(data)
+}).catch((error)=>{
+ console.log(error)
+})
+
+    // axios.post(`${process.env.REACT_APP_SERVER}/posthistory`, payload)
+    // .then((res)=>{
+    //  console.log(res,"check")
+    //  console.log(res.data.res,".res")
+    // })
+    // .catch((err)=>console.log(err))
+    
   }
 
   const [editedTranscript, setEditedTranscript] = useState("");
@@ -74,7 +105,7 @@ const Interview = () => {
       <h3 >{title}</h3>
       <h4>{type}{field? `- ${field}`:null}</h4>
       <div className='w-[95%] h-[75%] flex flex-row ' id="subContainer" style={{ position: 'fixed', bottom: 0 }}>
-      <div className='flex flex-col items-start justify-start h-full p-[20px] w-[40%] border-green-500 border-[1px] text-justify' id="promptContainer">
+      <div className='flex flex-col items-start justify-start h-full p-[20px] w-[40%] text-justify' id="promptContainer">
 <h5>Follow the below steps to conduct the interview:-</h5>
 <br/>
 <p>Step 1: Copy the below prompt and send to start the interview - </p>
@@ -82,10 +113,11 @@ const Interview = () => {
 <br/>
  <p>Step 2: Record or Type your answer to the question asked and send</p>
  <br/>
- <p>Step 3: Once all the questions are answered, AI will give a detailed feedback and score for your performance.</p>
-  
+ <p>Step 3: Once all the questions are answered, send the below prompt to get your feedback and score.</p>
+ <br/>
+ <p>Step 4: Click on Finish Interview to save your Interview.</p>
       </div>
-      <div id="chatContainer" className='flex flex-col items-start justify-start h-full p-[20px] w-[95%] border-green-500 border-[1px]'>
+      <div id="chatContainer" className='flex flex-col items-start justify-start h-full p-[20px] w-[95%] '>
     <div className='flex flex-col items-start justify-start h-[80%] overflow-y-scroll p-10 w-[100%] border-green-500 border-[1px]' id="chatBox" ref={chatBoxRef}>
       {messages.map((message,index)=>(
         message.isUser? <div key={index} className="bg-gray-200 text-black self-end my-[5px] p-[10px] rounded-[10px] max-w-[50%] break-words">
@@ -111,6 +143,7 @@ const Interview = () => {
           {isListening ? <BiSolidMicrophone /> : <BiMicrophone />}
         </button>
       <button onClick={handleSend} className='w-[8%] h-[40px] p-[10px] mx-[1px] rounded-[5px] bg-green-500 text-white cursor-pointer hover:opacity-0.8 border-none outline-none'>Send</button>
+      <button onClick={handleSave} className='w-[15%] h-[40px] p-[10px] mx-[1px] rounded-[5px] bg-green-500 text-white cursor-pointer hover:opacity-0.8 border-none outline-none'>Finish Interview</button>
     </div>
     </div>
     </div>

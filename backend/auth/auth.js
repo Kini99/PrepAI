@@ -14,9 +14,9 @@ const auth = async (req, res, next) => {
       try {
         const decoded = jwt.verify(token, "openai");
         console.log(decoded);
-        req.body.userid = decoded.userid;
+        req.body.userID = decoded.userID;
         req.body.name = decoded.name;
-        req.body.time = new Data();
+        req.body.time = new Date();
         next();
       } catch (err) {
         if (err.message === "jwt expired") {
@@ -31,3 +31,12 @@ const auth = async (req, res, next) => {
   }
 };
 module.exports = { auth };
+
+// const jwt = require("jsonwebtoken");
+// require("dotenv").config();
+// const { blackmodel } = require("../model/black.model");
+
+// const auth = async (req, res, next) => {
+//   next();
+// };
+// module.exports = { auth };
