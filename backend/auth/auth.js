@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
         console.log(decoded);
         req.body.userid = decoded.userid;
         req.body.name = decoded.name;
-        req.body.time = new Data();
+        req.body.time = new Date();
         next();
       } catch (err) {
         if (err.message === "jwt expired") {
