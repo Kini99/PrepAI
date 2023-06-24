@@ -4,9 +4,7 @@ const { UserModel } = require("../model/user.model");
 
 const historyRoute = express.Router();
 
-historyRoute.get("/data",(req,res)=>{
-    res.send("hello")
-})
+
 historyRoute.get("/",async(req,res)=>{
     console.log(req.body)
   try {
