@@ -1,3 +1,7 @@
+
+
+import InterviewCards from '../components/InterviewCards'
+
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, LinearScale } from 'chart.js';
@@ -24,6 +28,8 @@ import {
     
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import Navbar1 from '../components/Navbar1';
+
 
 const Dashboard = () => {
 
@@ -40,69 +46,37 @@ const Dashboard = () => {
 navigate("/interview");
   }
   // Sample data for average scores
-  const averageScores = {
-    overall: 7.8,
-    technical: 8.2,
-    hr: 7.4
-  };
-
-  // Sample data for individual technical and hr scores
-  const individualScores = {
-    technical: [8.5, 8.0, 8.7, 7.9, 8.2],
-    hr: [7.5, 7.8, 7.2, 7.9, 7.6]
-  };
-
-  const initialsFromName = (name) => {
-    const names = name.split(' ');
-    const initials = names.map((name) => name.charAt(0).toUpperCase()).join('');
-    return initials;
-  };
-
-  const calculateAverageScore = (scores) => {
-    const totalScores = Object.values(scores);
-    const sum = totalScores.reduce((accumulator, score) => accumulator + score, 0);
-    const average = sum / totalScores.length;
-    return average.toFixed(1); // Round to 1 decimal place
-  };
-
-  // Calculate overall average score
-  const overallAverage = calculateAverageScore(averageScores);
-
-  // Chart data for average scores
-  const chartData = {
-    labels: ['Overall', 'Technical', 'HR'],
-    datasets: [
-      {
-        label: 'Average Score',
-        data: [overallAverage, averageScores.technical, averageScores.hr],
-        backgroundColor: ['#4F46E5', '#34D399', '#F87171'],
-      },
-    ],
-  };
-
-  Chart.register(LinearScale);
-
-  // Navbar component
-  const Navbar = () => (
-    <nav className="flex justify-between items-center py-4 px-6 bg-gray-800">
-      <div className="flex items-center">
-        <div className="text-white font-semibold text-lg">Interview Prep</div>
-        <button className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onClick={onOpen}>
-          Start Interview
-        </button>
-      </div>
-      <div className="flex items-center">
-        <div className="text-white mr-4">{initialsFromName('John Doe')}</div>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
-          Logout
-        </button>
-      </div>
-    </nav>
-  );
-
+ 
   return (
+     <>
+    <Navbar1></Navbar1>
     <div>
-      <Navbar />
+
+      <h1>Welcome to PrepAI</h1>
+      <button className='bg-blue-500/75 p-2 text-white-600/100 m-[auto] mt-2 mb-2 text-white' onClick={onOpen}>Start New Interview</button>
+
+      <div className='w-[95%] m-[auto] flex justify-between mt-3'>
+        <div className='bg-sky-500/70 shadow-xl w-[75%] p-2 border-r-5'>
+          {/* <p>Interview Practice Details</p> */}
+
+          <p className='font-bold text-left'>Great job on completing your interview</p>
+          <br />
+
+          <p className='text-left text-white'>Results have been generated for the previous attempt. Complete all your interviews
+           to unlock your Profile Scorecard.</p>
+
+         
+        </div>
+
+        <div className='bg-white shadow-xl w-[20%]'>
+          <p className='font-bold'>Profile Score</p>
+
+
+        </div>
+      </div>
+
+       <InterviewCards></InterviewCards>
+
       <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -132,9 +106,9 @@ navigate("/interview");
 
 <br />
 
-
+{type === 'Technical Interview' && (
         <Select
-          // className="hidden"
+          className="hidden"
           placeholder="Select Interview Track"
           value={field}
           onChange={(e) => setField(e.target.value)}
@@ -143,9 +117,10 @@ navigate("/interview");
           <option value="Nodejs">Nodejs</option>
           <option value="Java">Java</option>
         </Select>
-      
-            </ModalBody>
+      )}
 
+            </ModalBody>
+  
             <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose} style={{backgroundColor:"black",color:"white"}}>
                 Close
@@ -154,9 +129,13 @@ navigate("/interview");
             </ModalFooter>
           </ModalContent>
         </Modal>
+
     </div>
+    </>
   );
+
 };
 
-export default Dashboard;
 
+
+export default Dashboard

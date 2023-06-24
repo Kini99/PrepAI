@@ -46,6 +46,7 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/login`, payload)
       .then((res) =>{
+        console.log("res",res)
         if(res.data.token){
           localStorage.setItem("logintoken",res.data.token)
           navigate("/dashboard")
@@ -68,6 +69,7 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/signup`, payload)
       .then((res) =>{
+
           navigate("/login")
          alert(res.data.message);
         })

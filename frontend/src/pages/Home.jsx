@@ -1,8 +1,10 @@
 import React from 'react'
+import Navbar from '../components/Navbar/Navbar'
 
 const Home = () => {
   return (
     <>
+    <Navbar></Navbar>
       <div className='w-[80%] m-[auto]'>
 
         {/* <h2 className='m-[2%] text-2xl'>Product Features</h2> */}
@@ -304,11 +306,11 @@ const Home = () => {
 
           <div className='w-[50%]'>
             <p>
-              YVI.ai uses artificial intelligence to revolutionize interview management. Our goal is for both employers as well as job seekers to be able to streamline their recruitment process, making it quicker and easier to hire the right person for the job. This helps employers quickly identify and assess potential candidates, find the right fit and reduce hiring time.
+              PrepAI uses artificial intelligence to revolutionize interview management. Our goal is for both employers as well as job seekers to be able to streamline their recruitment process, making it quicker and easier to hire the right person for the job. This helps employers quickly identify and assess potential candidates, find the right fit and reduce hiring time.
 
               <br /><br />
 
-              YVI is the best system in the market when it comes to online interviews. We are aware of the importance of offering a safe and reliable method for conducting interviews. The system is simple to use and does not require any additional setup. You can start using it immediately.
+              PrepAI is the best system in the market when it comes to online interviews. We are aware of the importance of offering a safe and reliable method for conducting interviews. The system is simple to use and does not require any additional setup. You can start using it immediately.
 
               <br /><br />
               email: support@yvi.com<br />
@@ -319,7 +321,9 @@ const Home = () => {
 
           </div>
 
-          <div className='w-[40%] m -[auto] border-2 border-black-600 border-black p-5'>
+          <div className='w-[40%] m -[auto] border-2 border-black-600 border-black p-3'>
+
+            <h4 className='text-center mb-1'>Contact form</h4>
 
             <form action="">
               <input type="text" name="name" placeholder="First Name" id="" className='w-[80%] h-10 border-2 border-black-600 border-black p-2' />
@@ -337,7 +341,7 @@ const Home = () => {
               <textarea type="text" name="name" rows="10" cols="50" placeholder="Message..." id="" className='w-[80%] h-10 border-2 border-black-600 border-black p-2'></textarea>
               <br />
               <br />
-              <button className='bg-sky-500/75 p-5 text-white-600/100'>Send Message</button>
+              <button className='bg-sky-500/75 p-2 text-white-600/100'>Send Message</button>
             </form>
 
           </div>

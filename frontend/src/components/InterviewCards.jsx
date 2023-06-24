@@ -60,7 +60,7 @@ let year = date.getFullYear();
 
                         </div>
 
-                        <div className='w-[200px] truncate text-xl font-semibold'>FT_NEM111_B26</div>
+                        <div className='w-[200px] truncate text-xl font-semibold'>{localStorage.getItem("title")}</div>
 
                         <div className='right-[35px] top-[24px] p-1 rounded-[6px] border-[0.5px] border-solid border-[#3470E4] bg-[#F2F6FF] P-[6px] text-center'>
                             <div className='text-base font-semibold text-[#5D8DE9]'>5.0</div>
@@ -69,7 +69,7 @@ let year = date.getFullYear();
 
                     </div>
 
-                    <button className='bg-sky-500/75 p-2 text-white-600/100' onClick={onOpen}>Review Interview</button>
+                    <button className='bg-sky-500/75 p-2 text-white-600/100' >Review Interview</button>
 
                     <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
