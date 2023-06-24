@@ -68,11 +68,11 @@ navigate("/interview");
          
         </div>
 
-        <div className='bg-white shadow-xl w-[20%]'>
+        {/* <div className='bg-white shadow-xl w-[20%]'>
           <p className='font-bold'>Profile Score</p>
 
 
-        </div>
+        </div> */}
       </div>
 
        <InterviewCards></InterviewCards>

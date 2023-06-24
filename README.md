@@ -1,9 +1,5 @@
 ## PREP AI
 
-### Deployed Link :-
-
-(Backend server is deployed on third-party app - cylic.sh)
-
 ### Description :-
 PrepAI is an AI-powered self-interview preparation platform designed to empower job seekers and interviewees in mastering their interview skills. With its advanced natural language processing capabilities, PrepAI simulates real interview scenarios, provides personalized feedback, and offers valuable resources for users to refine their interview techniques and boost their confidence.
 
@@ -22,13 +18,15 @@ The Backend is built using Node.js, Express and MongoDB.
 
 ### Functionalities working on this website :-
 1. There is a signup and signin functionality with fully validated forms to authenticate users along with an option to login via google.
-
-
-### UI Images :-
-
-![1](https://user-images.githubusercontent.com/118278010/246758460-fcdde12b-b3b4-4b02-b12d-527d38580763.png)
-
-
+2. Users can see their progress and interview history on their dashboard.
+3. Users can start a new Interview and follow the steps given to seamlessly practice their answers.
+4. Users will be given personalized feedback and scores for each interview.
+5. All Interviews, Feedbacks and Scores are saved and an average profile score is shown on the dashboard.
 
 ### Contributors :-
 
+Raghavendra Jingade - [GitHub](https://github.com/JRaghu842) 
+Kuldeep Negi - [GitHub](https://github.com/kuldeepkd13) 
+Manshi Kumari - [GitHub](https://github.com/manshikumari12) 
+Ruchi Agrawal - [GitHub](https://github.com/RuchiAgrawal9186) 
+Kinjal Momaya - [GitHub](https://github.com/Kini99) 
