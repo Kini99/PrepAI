@@ -9,6 +9,7 @@ const histroyschema = mongoose.Schema({
       role: { type: String, required: true },
       content: { type: String, required: true },
     },
+    { _id: false },
   ],
 });
 const HistoryModel = mongoose.model("history", histroyschema);
