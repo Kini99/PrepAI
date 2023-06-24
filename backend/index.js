@@ -4,6 +4,7 @@ const passport = require("passport");
 const { connection } = require("./db");
 const { Userroute } = require("./route/user.route");
 const { HistoryModel } = require("./model/history.model");
+const {historyRoute} = require("./route/history.route")
 const { auth } = require("./auth/auth");
 require("./google.oauth");
 const cors = require("cors");
@@ -15,7 +16,7 @@ app.use(express.json());
 const { googleAuthentication } = require("./google.oauth");
 
 app.use("/", Userroute);
-
+app.use("/History",auth,historyRoute)
 //===================google===============================================================================
 
 app.get(
@@ -105,7 +106,9 @@ app.use(auth);
 app.post("/posthistory", async (req, res) => {
   let obj = {};
   obj.userID = req.body.userID; // Corrected key name
-
+  obj.title = req.body.title;
+  obj.field = req.body.field;
+  obj.type = req.body.type;
   // Make sure to import the correct model name
   try {
 

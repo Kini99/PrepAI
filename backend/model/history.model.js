@@ -11,6 +11,13 @@ const histroyschema = mongoose.Schema({
     },
     { _id: false },
   ],
+  title:"String",
+  type:"String",
+  field:"String",
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 const HistoryModel = mongoose.model("history", histroyschema);
 
