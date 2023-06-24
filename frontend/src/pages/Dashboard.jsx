@@ -2,7 +2,7 @@
 
 import InterviewCards from '../components/InterviewCards'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, LinearScale } from 'chart.js';
 import {
@@ -38,6 +38,9 @@ const Dashboard = () => {
   const [title,setTitle]=useState("");
   const [type,setType]=useState("");
   const [field,setField]=useState("");
+
+  const [historyData,sethistoryData] = useState([])
+
   const navigate=useNavigate();
 
   const handleClick=()=>{
@@ -46,6 +49,38 @@ const Dashboard = () => {
     localStorage.setItem("title",title);
 navigate("/interview");
   }
+
+  useEffect(()=>{
+
+    const token=localStorage.getItem("logintoken")
+    // let payload;
+    //    payload={
+    //     title,
+    //     type,
+    //     field,
+    //     // conversationHistory:messages
+    //   }
+
+    fetch(`${process.env.REACT_APP_SERVER}/History`,{
+      method:"GET",
+      // body:JSON.stringify(payload),
+      headers: {
+       "Content-Type": "application/json",
+       "Authorization": `${token}`
+     }
+    })
+    .then((res)=>res.json())
+    .then((data)=>{
+     console.log(data)
+     console.log(data.history)
+     sethistoryData(data.history)
+    //  localStorage.setItem("userid",data.history.userID)
+     console.log(historyData,"check")
+    }).catch((error)=>{
+     console.log(error)
+    })
+
+  },[])
  
   return (
      <>
@@ -56,7 +91,7 @@ navigate("/interview");
       <button className='bg-blue-500/75 p-2 text-white-600/100 m-[auto] mt-2 mb-2 text-white' onClick={onOpen}>Start New Interview</button>
 
       <div className='w-[95%] m-[auto] flex justify-between mt-3'>
-        <div className='bg-blue-500/75 shadow-xl w-[75%] p-2 border-r-5'>
+        <div className='bg-blue-500/75 shadow-xl m-[auto] p-2 border-r-5'>
           {/* <p>Interview Practice Details</p> */}
 
           <p className='font-bold text-left'>Great job on completing your interview</p>
@@ -75,7 +110,13 @@ navigate("/interview");
         </div> */}
       </div>
 
-       <InterviewCards></InterviewCards>
+      {
+        historyData.map((el)=>{
+          return <InterviewCards {...el}></InterviewCards>
+        })
+      }
+
+       
 
       <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

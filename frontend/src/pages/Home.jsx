@@ -1,6 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faLock} from '@fortawesome/free-brands-svg-icons';
+import { faLock ,faClock,faUser,faRobot} from '@fortawesome/free-regular-svg-icons';
+// import {} from 
+import { AiFillLock,AiOutlineUser,AiOutlineRobot} from "react-icons/ai";
+import { GrNotes } from "react-icons/gr";
+import {HiUsers} from "react-icons/hi";
+
 
 const Home = () => {
   return (
@@ -15,7 +23,7 @@ const Home = () => {
 
           <div className='shadow-xl p-10'>
             <div className="rounded-full w-[15%] flex justify-center m-[auto]">
-              <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' />
+              <AiFillLock size="30px"></AiFillLock>
             </div>
 
             <h4 className='m-[2%] font-semibold'>Secure Login</h4>
@@ -24,7 +32,10 @@ const Home = () => {
 
           <div className='text-center shadow-xl p-10 '>
             <div className="rounded-full w-[15%] flex justify-center m-[auto] ">
-              <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' />
+              {/* <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' /> */}
+              {/* <FontAwesomeIcon icon={faClock} /> */}
+              {/* <FontAwesomeIcon icon={faClock} style={{width:"30%"}}/> */}
+              <AiOutlineUser size="30px"/>
             </div>
 
             <h4 className='m-[2%] font-semibold'>Personalized Candidate Profile</h4>
@@ -33,7 +44,7 @@ const Home = () => {
 
           <div className='text-center shadow-xl p-10'>
             <div className="rounded-full w-[15%] flex justify-center m-[auto]">
-              <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' />
+            <HiUsers size="30px"></HiUsers>
             </div>
 
             <h4 className='m-[2%] font-semibold'>Robust Interview Management</h4>
@@ -42,7 +53,7 @@ const Home = () => {
 
           <div className='text-center shadow-xl p-10'>
             <div className="rounded-full w-[15%] flex justify-center m-[auto]">
-              <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' />
+            <AiOutlineRobot size="30px"></AiOutlineRobot>
             </div>
 
             <h4 className='m-[2%] font-semibold'>Interview Review System</h4>
@@ -51,7 +62,8 @@ const Home = () => {
 
           <div className='text-center shadow-xl p-10'>
             <div className="rounded-full w-[15%] flex justify-center m-[auto]">
-              <img src="https://placehold.co/400" alt="placehold" className='rounded-full w-[100%]' />
+              
+              <GrNotes size="30px"></GrNotes>
             </div>
 
             <h4 className='m-[2%] font-semibold'>Live Feedback</h4>
