@@ -3,6 +3,8 @@ const app = express();
 const passport = require("passport");
 const { connection } = require("./db");
 const { Userroute } = require("./route/user.route");
+const { HistoryModel } = require("./model/history.model");
+const { auth } = require("./auth/auth");
 require("./google.oauth");
 const cors = require("cors");
 
@@ -32,6 +34,7 @@ app.get(
 // ***********************************************************************************
 
 const { Configuration, OpenAIApi } = require("openai");
+const { UserModel } = require("./model/user.model");
 
 const openAI = new OpenAIApi(
   new Configuration({
@@ -44,7 +47,7 @@ let conversationHistory = [];
 const generateSystemPrompt = (field) => {
   return {
     role: "system",
-    content: `You are an interviewer. Ask me 3 questions related to ${field}, one after the other. You should go to the next question only after I give an answer to the already asked question.`,
+    content: `You are an interviewer. Ask me 3 questions related to ${field}, one after the other. You should go to the next question only after I give an answer to the already asked question. Give me feedback at the end and give me rating out of 10 `,
   };
 };
 
@@ -85,7 +88,32 @@ app.post("/chatPrompt", async (req, res) => {
   return res.status(500).send({ status: 500, res: "Try again later" });
 });
 
-console.log(conversationHistory);
+// console.log(conversationHistory);
+
+app.get("/conversation", (req, res) => {
+  res.status(200).send(conversationHistory);
+});
+app.use(auth);
+
+app.post("/posthistory", async (req, res) => {
+  let obj = {};
+  obj.userID = req.body.userid; // Corrected key name
+
+  // Make sure to import the correct model name
+  try {
+    const user = await UserModel.findById(req.body.userid); // Corrected model name
+    if (!user) {
+      return res.send({ msg: "User not found" });
+    }
+    console.log(conversationHistory);
+    obj.conversationHistory = conversationHistory;
+    const history = new HistoryModel(obj);
+    await history.save();
+    return res.json(history);
+  } catch (error) {
+    return res.send({ msg: "Something went wrong", error: error.message }); // Corrected error variable name
+  }
+});
 
 app.listen(process.env.port, async () => {
   try {
