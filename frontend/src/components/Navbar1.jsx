@@ -45,7 +45,7 @@ const Navbar1 = () => {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <Link to="/"><img className="h-16 w-[100%]" src="./images/prepai.jpeg" alt="logo" /></Link>
+            <Link to="/dashboard"><img className="h-16 w-[100%]" src="./images/prepai.jpeg" alt="logo" /></Link>
           </a>
         </div>
         <div className="flex lg:hidden">
