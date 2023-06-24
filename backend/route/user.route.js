@@ -13,6 +13,14 @@ const Userroute = express.Router()
 Userroute.post("/signup",async (req,res)=>{
     const{ name, email, phone, password}=req.body
 
+    const passwordReq =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (!passwordReq.test(password)) {
+    return res.status(200).json({
+      msg: "Invalid password format! Password format Should contain atleast one uppercase character, one number, special character and length greater then 8.",
+    });
+  }
+
     const user =await UserModel.find({email})
     if(user.length<=0){
         try{
