@@ -52,18 +52,20 @@ const generateSystemPrompt = (field) => {
   };
 };
 
-app.post("/chatPrompt", async (req, res) => {
+app.post("/chatPrompt",auth, async (req, res) => {
   try {
     const { field, prompt } = req.body;
-    conversationHistory.push(generateSystemPrompt(field));
-    conversationHistory.push({
-      role: "assistant",
-      content: "Great, let's start the interview",
-    });
+    if (conversationHistory.length === 0) {
+      conversationHistory.push(generateSystemPrompt(field));
+      conversationHistory.push({
+        role: "assistant",
+        content: "Great, let's start the interview",
+      });
+    }
 
     conversationHistory.push({ role: "user", content: prompt });
 
-    if (conversationHistory.length === 5) {
+    if (conversationHistory.length === 2) {
       conversationHistory.push({
         role: "system",
         content: "Please provide your feedback and rating for the interview.",
