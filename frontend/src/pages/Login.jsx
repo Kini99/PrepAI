@@ -27,6 +27,7 @@ function Login() {
   const [userName,setUserName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const token=localStorage.getItem("loginToken")
 
   const navigate=useNavigate();
 
@@ -46,10 +47,13 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/login`, payload)
       .then((res) =>{
+        if(res.data.token){
+          localStorage.setItem("logintoken",res.data.token)
+          navigate("/dashboard")
+         }
          alert(res.data.msg);
-         localStorage.setItem("logintoken",res.data.token)
-         navigate("/dashboard")
-        })
+}
+        )
       .catch((err) => console.log(err));
 
     setEmail("");
@@ -67,8 +71,12 @@ function Login() {
     axios.post(`${process.env.REACT_APP_SERVER}/signup`, payload)
       .then((res) =>{
          alert(res.data.msg);
-         localStorage.setItem("logintoken",res.data.token)
-         navigate("/dashboard")
+         if(res.data.token){
+          localStorage.setItem("logintoken",res.data.token)
+         }
+         if(token){
+          navigate("/dashboard")
+        }
         })
       .catch((err) => console.log(err));
 
@@ -122,8 +130,8 @@ function Login() {
             <p className="text-center mt-3">or:</p>
           </div>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={email} onChange={(e)=>setEmail(e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={email} onChange={(e)=>setEmail(e.target.value)} required />
+          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={(e)=>setPassword(e.target.value)} required />
 
           <div className="d-flex justify-content-between mx-4 mb-4">
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
@@ -154,9 +162,9 @@ function Login() {
             <p className="text-center mt-3">or:</p>
           </div>
 
-          <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text' value={name} onChange={(e)=>setName(e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' value={email} onChange={(e)=>setEmail(e.target.value)} />
-          <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text' value={name} onChange={(e)=>setName(e.target.value)} required />
+          <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' value={email} onChange={(e)=>setEmail(e.target.value)} required />
+          <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' value={password} onChange={(e)=>setPassword(e.target.value)} required />
 
           <div className='d-flex justify-content-center mb-4'>
             <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
