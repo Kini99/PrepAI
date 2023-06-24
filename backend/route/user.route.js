@@ -64,6 +64,7 @@ Userroute.post("/signup", async (req, res) => {
       res.status(400).send({ message: "There’s already an account with that email" });
     }
   } catch (error) {
+    console.log(error.message)
     res.status(400).send({ message: error.message });
   }
 });
@@ -76,8 +77,8 @@ Userroute.post("/login", async (req, res) => {
     if (user.length > 0) {
       bcrypt.compare(password, user[0].password, (err, result) => {
         if (result) {
-          const token = jwt.sign({userid:user[0]._id}, process.env.TOKENKEY,{expiresIn:"7d"})
-          const refreshToken = jwt.sign({userid:user[0]._id},process.env.REFRESHTOKENKEY,{expiresIn:"28d"})
+          const token = jwt.sign({userID:user[0]._id}, process.env.TOKENKEY,{expiresIn:"7d"})
+          const refreshToken = jwt.sign({userID:user[0]._id},process.env.REFRESHTOKENKEY,{expiresIn:"28d"})
 
           res.send({ msg: " user has been Logged in ", token: token });
         }

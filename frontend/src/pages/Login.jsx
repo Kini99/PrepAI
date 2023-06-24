@@ -24,7 +24,6 @@ function Login() {
 
   const [justifyActive, setJustifyActive] = useState('tab1');
   const [name,setName]=useState("");
-  const [userName,setUserName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const token=localStorage.getItem("loginToken")
@@ -63,22 +62,16 @@ function Login() {
   const handleSignup = () => {
     const payload = {
       name,
-      userName,
       email,
       password,
     };
 
     axios.post(`${process.env.REACT_APP_SERVER}/signup`, payload)
       .then((res) =>{
-         alert(res.data.msg);
-         if(res.data.token){
-          localStorage.setItem("logintoken",res.data.token)
-         }
-         if(token){
-          navigate("/dashboard")
-        }
+          navigate("/login")
+         alert(res.data.message);
         })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
 
     setEmail("");
     setPassword("");
