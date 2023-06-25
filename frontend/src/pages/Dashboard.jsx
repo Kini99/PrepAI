@@ -1,5 +1,5 @@
 
-import React from 'react'
+// import React from 'react'
 import InterviewCards from '../components/InterviewCards'
 
 // import PropTypes from 'prop-types';
@@ -37,6 +37,7 @@ import {
     
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import Navbar1 from '../components/Navbar1';
 
 
 const Dashboard = () => {
@@ -97,28 +98,30 @@ navigate("/interview");
   Chart.register(LinearScale);
 
   // Navbar component
-  const Navbar = () => (
-    <nav className="flex justify-between items-center py-4 px-6 bg-gray-800">
-      <div className="flex items-center">
-        <div className="text-white font-semibold text-lg">Interview Prep</div>
-        <button className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onClick={onOpen}>
-          Start Interview
-        </button>
-      </div>
-      <div className="flex items-center">
-        <div className="text-white mr-4">{initialsFromName('John Doe')}</div>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
-          Logout
-        </button>
-      </div>
-    </nav>
-  );
+  // const Navbar = () => (
+  //   <nav className="flex justify-between items-center py-4 px-6 bg-gray-800">
+  //     <div className="flex items-center">
+  //       <div className="text-white font-semibold text-lg">Interview Prep</div>
+  //       <button className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onClick={onOpen}>
+  //         Start Interview
+  //       </button>
+  //     </div>
+  //     <div className="flex items-center">
+  //       <div className="text-white mr-4">{initialsFromName('John Doe')}</div>
+  //       <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
+  //         Logout
+  //       </button>
+  //     </div>
+  //   </nav>
+  // );
 
   return (
+     <>
+    <Navbar1></Navbar1>
     <div>
 
-      <h1>Welcome to PrepAI, UserName</h1>
-      <button className='bg-sky-500/75 p-2 text-white-600/100 m-[auto] mt-2 mb-2'>Start New Interview</button>
+      <h1>Welcome to PrepAI</h1>
+      <button className='bg-blue-500/75 p-2 text-white-600/100 m-[auto] mt-2 mb-2 text-white' onClick={onOpen}>Start New Interview</button>
 
       <div className='w-[95%] m-[auto] flex justify-between mt-3'>
         <div className='bg-sky-500/70 shadow-xl w-[75%] p-2 border-r-5'>
@@ -127,7 +130,7 @@ navigate("/interview");
           <p className='font-bold text-left'>Great job on completing your interview</p>
           <br />
 
-          <p className='text-left'>Results have been generated for the previous attempt. Complete all your interviews
+          <p className='text-left text-white'>Results have been generated for the previous attempt. Complete all your interviews
            to unlock your Profile Scorecard.</p>
 
          
@@ -157,7 +160,7 @@ navigate("/interview");
 
        <InterviewCards></InterviewCards>
 
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <div className="container mx-auto mt-8">
         <h1 className="text-2xl font-bold mb-4">Welcome, John Doe!</h1>
         <div className="grid grid-cols-2 gap-8">
@@ -289,11 +292,10 @@ navigate("/interview");
         </Modal>
 
     </div>
+    </>
   );
+
 };
-
-export default Dashboard;
-
 
 // ScoreIndicator.propTypes = {
 //   score: PropTypes.number.isRequired,

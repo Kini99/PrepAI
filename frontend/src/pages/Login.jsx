@@ -24,7 +24,6 @@ function Login() {
 
   const [justifyActive, setJustifyActive] = useState('tab1');
   const [name,setName]=useState("");
-  const [userName,setUserName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const token=localStorage.getItem("loginToken")
@@ -47,6 +46,7 @@ function Login() {
 
     axios.post(`${process.env.REACT_APP_SERVER}/login`, payload)
       .then((res) =>{
+        console.log("res",res)
         if(res.data.token){
           localStorage.setItem("logintoken",res.data.token)
           navigate("/dashboard")
@@ -63,7 +63,6 @@ function Login() {
   const handleSignup = () => {
     const payload = {
       name,
-      userName,
       email,
       password,
     };
@@ -73,10 +72,8 @@ function Login() {
          alert(res.data.msg);
          if(res.data.token){
           localStorage.setItem("logintoken",res.data.token)
-         }
-         if(token){
           navigate("/dashboard")
-        }
+         }
         })
       .catch((err) => console.log(err));
 
