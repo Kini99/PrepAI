@@ -22,6 +22,7 @@ The Backend is built using Node.js, Express and MongoDB.
 3. Users can start a new Interview and follow the steps given to seamlessly practice their answers.
 4. Users will be given personalized feedback and scores for each interview.
 5. All Interviews, Feedbacks and Scores are saved and an average profile score is shown on the dashboard.
+6. Users can easily review the entire interview and feedback and in case not needed, there is an option to delete the entire interview from the dashboard as well.
 
 ### UI Images :-
 ![1](https://github.com/Kini99/logicore/assets/118278010/2a37209d-62f0-4e84-802f-1d4fec5d63c9)
