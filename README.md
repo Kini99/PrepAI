@@ -23,10 +23,25 @@ The Backend is built using Node.js, Express and MongoDB.
 4. Users will be given personalized feedback and scores for each interview.
 5. All Interviews, Feedbacks and Scores are saved and an average profile score is shown on the dashboard.
 
+### UI Images :-
+![1](https://github.com/Kini99/logicore/assets/118278010/2a37209d-62f0-4e84-802f-1d4fec5d63c9)
+
+![2](https://github.com/Kini99/logicore/assets/118278010/110c6810-1ef2-45fc-9a8c-869ce4739faa)
+
+![3](https://github.com/Kini99/logicore/assets/118278010/2f29a077-b912-4b72-b095-7e1160082d7d)
+
+![4](https://github.com/Kini99/logicore/assets/118278010/07f5cd1b-abb9-4314-ae6c-9cced9b439b4)
+
+![5](https://github.com/Kini99/logicore/assets/118278010/75ef0f88-156a-49c7-8f12-19b09c827393)
+
 ### Contributors :-
 
 Raghavendra Jingade - [GitHub](https://github.com/JRaghu842) 
+
 Kuldeep Negi - [GitHub](https://github.com/kuldeepkd13) 
+
 Manshi Kumari - [GitHub](https://github.com/manshikumari12) 
+
 Ruchi Agrawal - [GitHub](https://github.com/RuchiAgrawal9186) 
+
 Kinjal Momaya - [GitHub](https://github.com/Kini99) 
